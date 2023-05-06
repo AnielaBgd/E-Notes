@@ -1,0 +1,34 @@
+header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 100%;
+    background: #3E7D3E;
+    color: white;
+    padding: 1%;
+}
+
+header .Description {
+    flex: 80%;
+    text-align: center;
+}
+
+header .Logo, header .Description {
+    display: inline-block;
+    font-size:1.2rem;
+    color: #fff !important;
+}
+
+header a.Logo {
+    text-decoration: none;
+}
+
+header .Description a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header .Description a:not(:first-child) {
+    padding-left: 50px;
+}
