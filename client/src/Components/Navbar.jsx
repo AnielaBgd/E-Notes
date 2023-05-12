@@ -11,10 +11,10 @@ const Navbar = () => {
       <hr />
 
         <div className="Links"> 
-          <Link to="/" className="Link"> Home</Link> 
-          <Link to="/favorites" className="Link">Favorites</Link>
-          <Link to="/settings" className="Link">Settings</Link>
-          <Link to="/trash" className="Link">Trash</Link>
+          <Link to="/" className="Link"><i className="fa fa-home"></i>Home</Link> 
+          <Link to="/favorites" className="Link"><i className="fa fa-heart"></i>Favorites</Link>
+          <Link to="/settings" className="Link"><i className="fa fa-cog"></i>Settings</Link>
+          <Link to="/trash" className="Link"><i className="fa fa-trash"></i>Trash</Link>
           
           <span className="Link">Log Out</span>
         </div> 

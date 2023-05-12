@@ -20,9 +20,19 @@ header .Logo, header .Description {
     color: #fff !important;
 }
 
+header .Logo {
+    flex: 20%;
+  }
+
 header a.Logo {
     text-decoration: none;
 }
+
+header .Logo img {
+    margin-right:10px;
+    margin-bottom:-5px;
+    color: white !important;
+  }
 
 header .Description a {
     color: #fff;

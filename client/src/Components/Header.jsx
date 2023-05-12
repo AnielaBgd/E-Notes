@@ -1,5 +1,5 @@
 import React from 'react'
-// import Logo from '../logo.svg';
+import Logo from '../logo.svg';
 import '../Styles/Header.css'
 import { Link } from 'react-router-dom';
 
@@ -7,7 +7,8 @@ const Header = (props) => {
   return (
     <header>
         <Link className="Logo" to="/"> 
-            <span>E-Notes</span>
+          <img width="25" src={Logo} alt="E-Notes Logo" />
+          <span>E-Notes</span>
         </Link>
 
       <div className="Description"> 
