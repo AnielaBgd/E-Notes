@@ -1,0 +1,97 @@
+.auth-register {
+    width: 50%;
+    margin:50px auto;
+    text-align:center;
+    z-index: 1;
+  }
+  
+  .auth-register-title {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #3E7D3E;
+  }
+  
+  .auth-register .auth-register-title h1{
+    font-weight: 400;
+  }
+  
+  .auth-register .input-container {
+    display: -ms-flexbox; 
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    border-bottom:2px solid #3E7D3E;
+  }
+  
+  .icon {
+    padding: 10px;
+    background: #3E7D3E;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+  }
+  
+  .input-field:focus {
+    border: 2px solid #3E7D3E;
+  }
+  
+  .register-btn { 
+    background-color: #fff;
+    border: 1px solid #3E7D3E;
+    color: #3E7D3E;
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  .register-btn:hover {
+    background-color: #3E7D3E;
+    color: #fff;
+    transition: 0.5s ease-in-out;
+  }
+  
+  .register-btn-div a {
+    display: inline-block;
+    text-decoration: none;
+    margin-top: 10px;
+    background-color: #fff;
+    border: 1px solid #3E7D3E;
+    color: #3E7D3E;
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .register-btn-div a:hover {
+    background-color: #3E7D3E;
+    color: #fff;
+    transition: 0.5s ease-in-out;
+  }
+  
+  .login-btn { 
+    background-color: #3E7D3E;
+    color: #fff;
+    padding: 15px 20px;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  .login-btn:hover {
+    background-color: #fff;
+    border: 1px solid #3E7D3E;
+    color: #3E7D3E;
+    transition: 0.5s ease-in-out;
+  }
+  
+  .have-account {
+    display: inline-block;
+    margin-top: 30px;
+  }
