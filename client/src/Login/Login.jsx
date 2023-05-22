@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { validateRequiredInputs } from '../Components/Utils'
-import axios from 'axios'
+import { AuthContext } from '../Context/authContext';
+import '../Styles/Authentication.css'
 
 const Login = () => {
 
@@ -10,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState(null)
   const [error, setError] = useState('')
 
-  //axios.defaults.withCredentials = true
+  const { login } = useContext(AuthContext);
 
   const handleUsername = (e) => {
     setUsername(e.target.value)
@@ -19,7 +20,7 @@ const Login = () => {
     setPassword(e.target.value)
   } 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     let formData = [ 
       {'username': username},
@@ -29,21 +30,13 @@ const Login = () => {
     if (!validateRequiredInputs(formData)) {
       setError('Please fill in all fields!')
       return false 
-    } else { 
-    axios.post('/auth/login', formData)    
-    .then(response => {
-        if(response.data.message === undefined) {
-          //Clear form data and state
-          e.target.reset()
-          setUsername(null)
-          setPassword(null) 
-          setError('')
-          // Redirect to e-notes homepage
-          navigate("/")  
-       } else {
-        setError(response.data.message)
-       } 
-    }).catch(err => setError(err.message)) 
+     } else {
+      try{
+        await login(formData)
+        navigate("/");
+      }catch(error){
+        setError(error.response.data);
+      } 
   }
   }
   

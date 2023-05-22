@@ -55,8 +55,6 @@ export const login = (request, response) => {
                         })
                         .status(200)
                         .json(other);
-                        //request.session.user = result 
-                       // response.send({"status": response.statusCode, loggedIn: true})
                     } else {
                         response.send({"message": "Wrong username or password"})
                     }
@@ -68,8 +66,8 @@ export const login = (request, response) => {
     )
 };
 
-export const logout = (req, res) => {
-    res.clearCookie("access_token", {
+export const logout = (request, response) => {
+    response.clearCookie("access_token", {
       sameSite: "none",
       secure:true
     }).status(200).json("User has been logged out!")

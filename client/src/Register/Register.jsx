@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { validateRequiredInputs } from '../Components/Utils.js'
 import axios from 'axios'
-import '../Styles/Register.css'
+import '../Styles/Authentication.css'
 
 const Register = () => {
 

@@ -1,26 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import '../Styles/Navbar.css'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { AuthContext } from '../Context/authContext'
 
 
 const Navbar = () => {
-  const navigate = useNavigate()
 
-  const [user, setUser] = useState(null)
-
-  const logout = (e) => {
-    e.preventDefault()
-    axios.post('/auth/logout')     
-    .then(response => {
-     navigate("/")  
-    })
-  }
+  const { currentUser, logout } = useContext(AuthContext);
 
   return (
     <>
       <div className="Navbar">
-      <h2>Welcome back, user</h2>  
+      <h2><i className="fa fa-user"></i> Welcome back, <strong>{currentUser?.username}</strong></h2>  
 
       <br />
       <hr />
