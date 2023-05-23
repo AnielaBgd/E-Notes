@@ -10,20 +10,19 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="Navbar">
-      <h2><i className="fa fa-user"></i> Welcome back, <strong>{currentUser?.username}</strong></h2>  
-
+      <div className="navbar">
+      <h2>Welcome, {currentUser?.username}</h2>
       <br />
       <hr />
 
-        <div className="Links"> 
-          <Link to="/" className="Link"><i className="fa fa-home"></i>Home</Link> 
-          <Link to="/favorites" className="Link"><i className="fa fa-heart"></i>Favorites</Link>
-          <Link to="/settings" className="Link"><i className="fa fa-cog"></i>Settings</Link>
-          <Link to="/trash" className="Link"><i className="fa fa-trash"></i>Trash</Link>
+        <div className="links"> 
+          <Link to="/" className="link"><i className="fa fa-home"></i> Home</Link> 
+          <Link to="/favorites" className="link"><i className="fa fa-heart"></i> Favorites</Link>
+          <Link to="/settings" className="link"><i className="fa fa-cog"></i> Settings</Link>
+          <Link to="/trash" className="link"><i className="fa fa-trash"></i> Trash</Link>
           
-          <Link onClick={logout} className="Link">
-            <span>Log Out</span>
+          <Link onClick={logout} to="/" className="link">
+            <span><i className="fa fa-sign-out"></i> Log Out</span>
           </Link>
         </div> 
       </div>

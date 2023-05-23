@@ -10,6 +10,9 @@ import Favorites from './Favorites/Favorites'
 import Settings from './Settings/Settings'
 import Trash from './Trash/Trash'
 import Notebooks from './Notebooks/Notebooks'
+import AddNotebook from './Notebooks/AddNotebook.jsx'
+import Notebook from './Notebooks/Notebook.jsx'
+import EditNotebook from './Notebooks/EditNotebook.jsx'
 import Notes from './Notes/Notes'
 import Projects from './Projects/Projects'
 import Welcome from './Components/Welcome'
@@ -25,7 +28,7 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path="/" element={currentUser ? (<Home />) : (<Welcome/>)} />
+          <Route path="/" element={currentUser ? <Home /> : <Welcome/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/favorites" element={<Favorites />} />
@@ -33,6 +36,9 @@ function App() {
           <Route path="/trash" element={<Trash />} />
 
           <Route path="/notebooks" element={<Notebooks />} />
+          <Route path="/add-notebook" element={<AddNotebook />}></Route>
+          <Route path="/edit-notebook/:id" element={<EditNotebook />}></Route>
+          <Route path="/notebook/:id" element={<Notebook />}></Route>
           <Route path="/notes" element={<Notes />}/>
           <Route path="/projects" element={<Projects />}/>
         </Routes>

@@ -9,36 +9,36 @@ header {
     padding: 1%;
 }
 
-header .Description {
+header .description {
     flex: 80%;
     text-align: center;
 }
 
-header .Logo, header .Description {
+header .logo, header .description {
     display: inline-block;
     font-size:1.2rem;
     color: #fff !important;
 }
 
-header .Logo {
+header .logo {
     flex: 20%;
   }
 
-header a.Logo {
+header a.logo {
     text-decoration: none;
 }
 
-header .Logo img {
+header .logo img {
     margin-right:10px;
     margin-bottom:-5px;
     color: white !important;
   }
 
-header .Description a {
+header .description a {
     color: #fff;
     text-decoration: none;
 }
 
-header .Description a:not(:first-child) {
+header .description a:not(:first-child) {
     padding-left: 50px;
 }

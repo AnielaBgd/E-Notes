@@ -12,14 +12,55 @@ a {
     color:#3E7D3E; 
 }
 
-.Container {
+.container {
     display: flex;
     flex-direction: row;
     width:100%;
     margin-top: 20px;
 }
 
-.Main-Content {
+.main-content {
     flex: 80%;
 }
 
+
+/* Media queries */
+@media only screen and (max-width: 768px) {
+  .app {
+    padding: 1%;
+  }
+  header {
+    flex-direction: column;
+  }
+
+  header .logo, header .description {
+    flex: 100%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .container{
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .main-content .navbar {
+    flex: 100%; 
+    text-align: center;
+    border-right: none;
+  }
+
+  .main-content .assistant-notebook i{
+    width: 98%;
+    padding:3%;
+    margin-top:30px;
+  }
+
+  .main-content p.not-found {
+    width: 98%;
+    padding:3%;
+    margin-top:10px;
+  }
+
+}

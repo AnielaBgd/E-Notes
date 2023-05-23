@@ -6,15 +6,15 @@ import { Link } from 'react-router-dom';
 const Header = (props) => { 
   return (
     <header>
-        <Link className="Logo" to="/"> 
+        <Link className="logo" to="/"> 
           <img width="25" src={Logo} alt="E-Notes Logo" />
           <span>E-Notes</span>
         </Link>
 
-      <div className="Description"> 
-        <Link to="/notebooks" className="Link">Notebooks</Link>
-        <Link to="/notes" className="Link">Notes</Link>
-        <Link to="/projects" className="Link">Projects</Link>
+      <div className="description"> 
+        <Link to="/notebooks" className="link">Notebooks</Link>
+        <Link to="/notes" className="link">Notes</Link>
+        <Link to="/projects" className="link">Projects</Link>
       </div>
     </header>
   )

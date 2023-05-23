@@ -1,39 +1,39 @@
 .welcome {
     text-align: center;
-  }
+}
   
-  .welcome .welcome-title { 
+.welcome .welcome-title { 
     margin-top: 50px;
     margin-bottom: 50px;
-  }
+}
   
-  .welcome .welcome-title h1 { 
+.welcome .welcome-title h1 { 
     font-weight: 400;
-  }
+}
   
-  .welcome .welcome-title h3 { 
+.welcome .welcome-title h3 { 
     margin-top: 50px;
     font-weight: 200;
-  }
+}
   
-  .welcome .welcome-register-login { 
+.welcome .welcome-register-login { 
     margin-top: 50px;
     margin-bottom: 50px;
-  }
+}
   
-  .registration { 
+.registration { 
     margin-top: 50px;
     margin-bottom: 50px;
-  }
+}
   
-  .registration .register {
+.registration .register {
     display: inline-block;
     padding: 10px 30px;
     background: #3E7D3E;
     color: #fff;
     text-decoration: none !important;
     margin-bottom: 10px;
-  }
+}
   
   .registration .login { 
     display: inline-block;
