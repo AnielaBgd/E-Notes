@@ -2,6 +2,7 @@
     flex: 20%;
     padding: 1%;
     border-right:1px solid #3E7D3E;
+    /* position: fixed; */
   }
   
 .navbar h2 {

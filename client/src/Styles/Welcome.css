@@ -35,10 +35,10 @@
     margin-bottom: 10px;
 }
   
-  .registration .login { 
+.registration .login { 
     display: inline-block;
     padding: 10px 37px;
     border:1px solid #3E7D3E;
     color: #3E7D3E;
     text-decoration: none !important;
-  }
+}

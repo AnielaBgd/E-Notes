@@ -4,10 +4,10 @@ import Navbar from '../Components/Navbar'
 
 const Projects = () => {
   return (
-    <div className='Container'>
+    <div className='container'>
       <Navbar />
-      <div className='Main-Content'>
-        <h1>Hello</h1>
+      <div className='main-content'>
+        <h1>Your projects</h1>
       </div>
     </div>
   )

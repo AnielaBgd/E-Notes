@@ -7,7 +7,7 @@ const Trash = () => {
     <div className='Container'>
       <Navbar />
       <div className='Main-Content'>
-        <h1>Hello</h1>
+        <h1>Trash</h1>
       </div> 
     </div>
   )

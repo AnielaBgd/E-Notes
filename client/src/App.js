@@ -14,6 +14,8 @@ import AddNotebook from './Notebooks/AddNotebook.jsx'
 import Notebook from './Notebooks/Notebook.jsx'
 import EditNotebook from './Notebooks/EditNotebook.jsx'
 import Notes from './Notes/Notes'
+import AddNote from './Notes/AddNote.jsx'
+import Note from "./Notes/Note.jsx"
 import Projects from './Projects/Projects'
 import Welcome from './Components/Welcome'
 import './Styles/App.css'
@@ -39,7 +41,10 @@ function App() {
           <Route path="/add-notebook" element={<AddNotebook />}></Route>
           <Route path="/edit-notebook/:id" element={<EditNotebook />}></Route>
           <Route path="/notebook/:id" element={<Notebook />}></Route>
+
           <Route path="/notes" element={<Notes />}/>
+          <Route path="/notes/:id" element={<Note />}/>
+          <Route path="/add-note" element={<AddNote />}/>
           <Route path="/projects" element={<Projects />}/>
         </Routes>
 

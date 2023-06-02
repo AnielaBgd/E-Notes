@@ -5,7 +5,7 @@ const Footer = () => {
   const getCurrentYear = () => new Date().getFullYear()
   return (
     <footer>
-      <span>E-Notes</span> - All rights reserved &copy; {getCurrentYear()}
+      <span>E-Notes - All rights reserved &copy; {getCurrentYear()}</span>
     </footer>
   )
 }

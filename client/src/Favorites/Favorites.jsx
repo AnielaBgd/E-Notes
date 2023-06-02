@@ -7,7 +7,7 @@ const Favorites = () => {
     <div className='Container'>
       <Navbar />
       <div className='Main-Content'>
-        <h1>Hello</h1>
+        <h1>Favorites</h1>
       </div> 
     </div>
   )
