@@ -15,9 +15,11 @@ import Notebook from './Notebooks/Notebook.jsx'
 import EditNotebook from './Notebooks/EditNotebook.jsx'
 import Notes from './Notes/Notes'
 import AddNote from './Notes/AddNote.jsx'
+import EditNote from "./Notes/EditNote.jsx"
 import Note from "./Notes/Note.jsx"
 import Projects from './Projects/Projects'
 import Welcome from './Components/Welcome'
+import AddProject from "./Projects/AddProject.jsx"
 import './Styles/App.css'
 
 function App() {
@@ -44,8 +46,11 @@ function App() {
 
           <Route path="/notes" element={<Notes />}/>
           <Route path="/notes/:id" element={<Note />}/>
+          <Route path="/edit-note/:id" element={<EditNote />}/>
           <Route path="/add-note" element={<AddNote />}/>
+
           <Route path="/projects" element={<Projects />}/>
+          <Route path="/add-project" element={<AddProject />}/>
         </Routes>
 
         <Footer />

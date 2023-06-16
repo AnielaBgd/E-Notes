@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
+import parse from 'html-react-parser'
 import axios from 'axios'
 
 const Note = () => {
@@ -21,18 +22,6 @@ const Note = () => {
         fetchData();}
     }, [params.id])
 
-    // useEffect(()=> {
-    //     if(params.id) {
-    //         axios.get(`/notes/get-note/${params.id}`)
-    //         .then((response) => {
-    //             console.log(response.data[0])
-    //             setNote(response.data[0])
-    //             console.log(note)
-    //         })
-    //         .catch(err => console.log(err))
-    //     }
-    //   }, [params.id])
-
   return (
     <div className='container'>
         <Navbar />
@@ -42,6 +31,16 @@ const Note = () => {
             <Link to="/notes"> 
                 <i className='fa fa-arrow-left'>Go back</i>
             </Link>
+        </div>
+        <div className='note-container'>
+          <hr />
+          <h3>Notebook Title: {note.notebook_title}</h3>
+          <br />
+          <hr />
+          <div className='note-content'>
+            {/* <div>{typeof(note.note_content) === 'string' && parse(note.note_content)}</div> */}
+            <p>{parse(String(note.note_content))}</p>
+          </div>
         </div>
       </div>
     </div>

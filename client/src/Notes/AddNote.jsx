@@ -28,14 +28,6 @@ const AddNote = () => {
     fetchData();
   }, [currentUser.id]); 
 
-  // useEffect(()=> { 
-  //   axios.get(`/notebooks/${currentUser.id}`) 
-  //       .then((response) => {
-  //         setNotebooks(response.data)
-  //       }) 
-  //       .catch(err => console.log(err))
-  // }, [currentUser.id])
-
 
   const handleNoteBook = (e) => {
     setNoteBook(e.target.value)
@@ -90,23 +82,23 @@ const AddNote = () => {
       </div>
  
       <form className="form-container" onSubmit={submitNote}>
-      <div className="input-container">
-          <input onChange={handleTitle} className="input-field" placeholder="Note title..." type="text" id="title" name="title" />
-      </div>
-      <br />
-
-      <div className="input-container">
-          <select onChange={handleNoteBook} className="input-field">
-          {notebooks.map(notebook =>
-            <option key={notebook.id} value={notebook.id}>{notebook.title}</option>
-          )};
-          </select>
+        <div className="input-container">
+            <input onChange={handleTitle} className="input-field" placeholder="Note title..." type="text" id="title" name="title" />
         </div>
         <br />
 
         <div className="input-container">
-          <button className="login-btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i> Add note</button>
-        </div>
+            <select onClick={handleNoteBook} className="input-field">
+            {notebooks.map(notebook =>
+              <option key={notebook.id} value={notebook.id}>{notebook.title}</option>
+            )};
+            </select>
+          </div>
+          <br />
+
+          <div className="input-container">
+            <button className="login-btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i> Add note</button>
+          </div>
       </form>
       
     </div> 

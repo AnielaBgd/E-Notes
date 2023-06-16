@@ -95,3 +95,13 @@ export const deleteNote = (request, response) => {
         response.send(result);
     })
 };
+
+export const editNote = (request, response) => {
+    const note_data = request.body;
+    const last_modified = new Date().toJSON().slice(0, 10).toString();
+
+    const q = "UPDATE notes SET title = ?, note_content = ?, notebook_id = ?, last_modified = ? WHERE id = ?";
+    db.query(q, [note_data[0].noteTitle, note_data[0].noteEditorContent, note_data[0].notebookId, last_modified], (err, result) => {
+        response.send(result);
+    })
+};

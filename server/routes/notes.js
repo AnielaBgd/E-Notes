@@ -1,5 +1,5 @@
 import express from "express";
-import { getNotes, getNote, addNote, deleteNote, addNoteToFavourites } from "../controllers/note.js";
+import { getNotes, getNote, addNote, deleteNote, addNoteToFavourites, editNote } from "../controllers/note.js";
 
 const router = express.Router();
 
@@ -8,5 +8,6 @@ router.get("/get-note/:id", getNote);
 router.post("/add-note", addNote);
 router.delete("/delete-note/:id", deleteNote);
 router.put("/add-note-to-favourite/:id", addNoteToFavourites);
+router.put("/edit-note", editNote);
 
 export default router;

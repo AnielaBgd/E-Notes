@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Color } from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
@@ -161,7 +161,7 @@ const MenuBar = ({ editor }) => {
 }
 
 const Tiptap = (props) => {
-  const editor = useEditor({
+   const editor = useEditor({
     extensions: [
       Color.configure({ types: [TextStyle.name, ListItem.name] }),
       TextStyle.configure({ types: [ListItem.name] }),
@@ -179,12 +179,22 @@ const Tiptap = (props) => {
     content: ``,
     onUpdate({ editor }) {
         props.handleEditorContent(editor.getHTML())
-      },
+    },
   })
+
+
+  useEffect(() => {
+    if (props.noteContent){
+      editor.commands.setContent(props.noteContent)
+    }  
+  }, [props.noteContent])
+  // if (props.noteContent){
+  //   editor.commands.setContent(props.noteContent)
+  // }
 
   if(props.submitted) {
     editor.commands.clearContent()
-   }
+  }
 
   return (
     <div>

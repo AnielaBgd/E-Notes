@@ -19,6 +19,7 @@ const Notes = () => {
         if (currentUser.id) {
         const res = await axios.get(`/notes/get-notes/${currentUser.id}`);
         setNotes(res.data);
+        console.log(res.data)
         console.log(notes);
         }
       } catch (err) {
@@ -26,7 +27,7 @@ const Notes = () => {
       }
     };
     fetchData();
-  }, [currentUser.id]);
+  }, []);
 
   const deleteNote = (noteId) => { 
     axios.delete(`/notes/delete-note/${noteId}`)
