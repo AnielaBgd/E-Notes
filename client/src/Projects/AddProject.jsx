@@ -1,37 +1,40 @@
-import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef, useState, useContext, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
-import Task from './Task'
+import axios from 'axios'
+import { AuthContext } from '../Context/authContext'
+import { validateRequiredInputs } from '../Components/Utils'
 
 const AddProject = () => {
-    const [names, setNames] = useState([])
-    const [optionValue, setOptionValue] = useState('')
-    const [tasks, setTasks] = useState([])
-    const inputRef = useRef()
+    const navigate = useNavigate()
+    const [projectStatus, setProjectStatus] = useState('')
+    const status = ['NOT STARTED', 'IN PROGRESS', 'COMPLETED']
+    const [projectTitle, setProjectTitle] = useState('')
+    const [projectDescription, setProjectDescription] = useState('')
 
-    // const handleInputChange = (e) => {
-    //     setInputValue(e.target.value)
-    // }
+    const { currentUser } = useContext(AuthContext);
 
-    const addMember = (e) => {
+    const handleTitle = (e) => {
+        setProjectTitle(e.target.value)
+    }
+
+    const handleDescription = (e) => {
+        setProjectDescription(e.target.value)
+    }
+
+    const submitProject = (e) => {
         e.preventDefault()
-
-        const value = inputRef.current.value
-        if (value === "") return
-        setNames(prev => {
-            return [...prev, value]
+        let formData = [
+            {'title': projectTitle,
+             'description': projectDescription,
+             'status': projectStatus,
+             'userId': currentUser.id}
+        ]
+        axios.post('/projects/add-project', formData).then( response => {
+            e.target.reset()
+            navigate('/projects')
         })
-        inputRef.current.value = ""
     }
-
-    const addTask = () => {
-        setTasks([...tasks,  ])
-    }
-
-    // const handleTasks = (e) => {
-    //     e.preventDefault()
-
-    // }
 
   return (
     <div className='container'>
@@ -41,31 +44,32 @@ const AddProject = () => {
         <hr />
 
         <div className="assistant-notebook">
-            <Link to="/notebooks"> 
+            <Link to="/projects"> 
                 <i className='fa fa-arrow-left'> Go back</i>
             </Link>
         </div>
         <br />
 
-        <form className="form-container">
-        <div className="input-container">
-            <input className="input-field" placeholder="Project name" type="text" id="title" name="title" />
-        </div>
-        <div className="input-container">
-            <input className="input-field" placeholder="Project description" type="text" id="title" name="desription" />
-        </div>
-        <div className="input-container">
-            <input className="input-field" ref={inputRef} placeholder="Member name" type="text" id="title" name="title" />
-        </div>
-        <button type="submit" onClick={addMember}>Add Members</button>
-        <select className="input-field" value = {optionValue} onChange={ (e) => setOptionValue(e.target.value) }>
-        {names.map( (name, index) => 
-            <option key={index}>{name}</option>)
-        }
-        </select>
-        <br />
-        <br />
-        <button type="submit" onClick={addTask}>Add Task</button>
+        <form className="form-container" onSubmit={submitProject}>
+            <div className="input-container">
+                <input className="input-field" onChange={handleTitle} placeholder="Project name" type="text" id="title" name="title" />
+            </div>
+
+            <div className="input-container">
+                <input className="input-field" onChange={handleDescription} placeholder="Project description" type="text" id="title" name="description" />
+            </div>
+
+            <span>Project status:</span>
+            <select className="input-field"  onChange={ (e) => {
+                setProjectStatus(e.target.value)} }>
+            {status.map( options => 
+                <option>{options}</option>)}
+            </select>
+            <br />
+            <br />
+            <div className="input-container">
+                <button className="login-btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i> Add project</button>
+            </div>
         </form>
 
     </div>

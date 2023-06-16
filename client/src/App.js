@@ -4,6 +4,7 @@ import { AuthContext } from './Context/authContext.js'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
 import Home from './Home/Home'
+import Welcome from './Components/Welcome'
 import Register from './Register/Register'
 import Login from './Login/Login'
 import Favorites from './Favorites/Favorites'
@@ -18,8 +19,10 @@ import AddNote from './Notes/AddNote.jsx'
 import EditNote from "./Notes/EditNote.jsx"
 import Note from "./Notes/Note.jsx"
 import Projects from './Projects/Projects'
-import Welcome from './Components/Welcome'
 import AddProject from "./Projects/AddProject.jsx"
+import EditProject from "./Projects/EditProject.jsx"
+import Project from "./Projects/Project.jsx"
+import Task from "./Tasks/AddTask.jsx"
 import './Styles/App.css'
 
 function App() {
@@ -51,6 +54,11 @@ function App() {
 
           <Route path="/projects" element={<Projects />}/>
           <Route path="/add-project" element={<AddProject />}/>
+          <Route path="/edit-project/:id" element={<EditProject />}/>
+          <Route path="/project/:id" element={<Project />}/>
+
+          <Route path="/add-task" element={<Task />}/>
+
         </Routes>
 
         <Footer />

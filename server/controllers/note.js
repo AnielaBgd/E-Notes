@@ -101,7 +101,7 @@ export const editNote = (request, response) => {
     const last_modified = new Date().toJSON().slice(0, 10).toString();
 
     const q = "UPDATE notes SET title = ?, note_content = ?, notebook_id = ?, last_modified = ? WHERE id = ?";
-    db.query(q, [note_data[0].noteTitle, note_data[0].noteEditorContent, note_data[0].notebookId, last_modified], (err, result) => {
+    db.query(q, [note_data[0].noteTitle, note_data[0].noteEditorContent, note_data[0].notebookId,last_modified, note_data[0].note_id], (err, result) => {
         response.send(result);
     })
 };

@@ -11,8 +11,6 @@ const Notebook = () => {
     if(params.id) {
         axios.get(`/notebooks/get-notebook/${params.id}`)
         .then((response) => {
-            console.log(response.data)
-            console.log(response.data[0])
             setNotebook(response.data[0])
         }) 
         .catch(err => console.log(err))
