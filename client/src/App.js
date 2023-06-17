@@ -23,6 +23,7 @@ import AddProject from "./Projects/AddProject.jsx"
 import EditProject from "./Projects/EditProject.jsx"
 import Project from "./Projects/Project.jsx"
 import Task from "./Tasks/AddTask.jsx"
+import EditTask from "./Tasks/EditTask.jsx"
 import './Styles/App.css'
 
 function App() {
@@ -57,8 +58,8 @@ function App() {
           <Route path="/edit-project/:id" element={<EditProject />}/>
           <Route path="/project/:id" element={<Project />}/>
 
-          <Route path="/add-task" element={<Task />}/>
-
+          <Route path="/add-task/:id" element={<Task />}/>
+          <Route path="/edit-task/:id" element={<EditTask />}/>
         </Routes>
 
         <Footer />

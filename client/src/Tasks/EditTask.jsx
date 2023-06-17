@@ -3,25 +3,43 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Navbar from '../Components/Navbar'
 
-const AddTask = () => {
+const EditTask = () => {
     const navigate = useNavigate()
     const params = useParams()
     const [taskStatus, setTaskStatus] = useState('')
     const status = ['NOT STARTED', 'IN PROGRESS', 'COMPLETED']
     const [taskTitle, setTaskTitle] = useState('')
     const [memberName, setMemberName] = useState('')
-    const [project, setProject] = useState([])
-    useEffect(() => {
-        const fetchData = async () => {
-          try{
-            const res = await axios.get(`/projects/get-project/${params.id}`);
-            setProject(res.data)
-          } catch (err) {
-            console.log(err);
-          }
-        };
-        fetchData();
-      }, [params.id]);
+    const [projectId, setProjectId] = useState([])
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //       try{
+    //         console.log(params.id)
+    //         const res = await axios.get(`/tasks/get-task/${params.id}`);
+    //         setTaskTitle(res.data[0].title)
+    //         console.log(res.data[0])
+    //       } catch (err) {
+    //         console.log(err);
+    //       }
+    //     };
+    //     fetchData();
+    //   }, [params.id]);
+
+      useEffect(()=> {
+        if(params.id) {
+            axios.get(`/tasks/get-task/${params.id}`) 
+            .then((response) => {
+                console.log(response.data[0])
+                setTaskTitle(response.data[0].name)
+                setMemberName(response.data[0].member)
+                setTaskStatus(response.data[0].status)
+                setProjectId(response.data[0].projectId)
+                console.log(response.data[0])
+            }) 
+            .catch(err => console.log(err))
+        }
+      }, [params.id])
 
 
     const handleTitle = (e) => {
@@ -40,11 +58,12 @@ const AddTask = () => {
             {'name': taskTitle,
              'member': memberName,
              'status': taskStatus,
-             'projectId': params.id}
+            }
         ]
-        axios.post('/tasks/add-task', formData).then( response => {
+        formData[0].id = parseInt(params.id)
+        axios.put('/tasks/edit-task', formData).then( response => {
             e.target.reset()
-            navigate(`/project/${params.id}`)
+            navigate(`/project/${projectId}`)
         })
     }
 
@@ -52,22 +71,22 @@ const AddTask = () => {
     <div className='container'>
         <Navbar />
         <div className='main-content'>
-            <h1>Add task</h1>
+            <h1>Edit task</h1>
             <hr />
             <div className="assistant-notebook">
-            <Link to="/projects"> 
+            <Link to={`/project/${params.id}`}>
                 <i className='fa fa-arrow-left'> Go back</i>
             </Link>
             <form className='form-container' onSubmit={submitTask}>
                 <div className="input-container">
-                    <input className="input-field" onChange={handleTitle} placeholder="Task name" type="text" id="title" name="title" />
+                    <input className="input-field" value={taskTitle} onChange={handleTitle} placeholder="Task name" type="text" id="title" name="title" />
                 </div>
                 <br />
                 <div className="input-container">
-                    <input className="input-field" onChange={handleMember} placeholder="Member name" type="text" id="title" name="title" />
+                    <input className="input-field" value={memberName} onChange={handleMember} placeholder="Member name" type="text" id="title" name="title" />
                 </div>
                 <span>Project status:</span>
-                <select className="input-field"  onClick={ (e) => {
+                <select className="input-field" value={taskStatus}  onChange={ (e) => {
                     setTaskStatus(e.target.value)} }>
                     {status.map( options => 
                     <option>{options}</option>)}
@@ -85,4 +104,4 @@ const AddTask = () => {
   )
 }
 
-export default AddTask
+export default EditTask

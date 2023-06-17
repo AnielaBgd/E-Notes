@@ -26,7 +26,7 @@ const AddNote = () => {
       }
     };
     fetchData();
-  }, [currentUser.id]); 
+  }, [currentUser.id]);
 
 
   const handleNoteBook = (e) => {
@@ -49,7 +49,7 @@ const AddNote = () => {
       'notebookId': notebook,
       'noteTitle': noteTitle, 
       'noteEditorContent': noteEditorContent
-    }
+      }
     ]
     setIsSubmitted(true)
 
@@ -82,12 +82,12 @@ const AddNote = () => {
       </div>
  
       <form className="form-container" onSubmit={submitNote}>
-        <div className="input-container">
+          <div className="input-container">
             <input onChange={handleTitle} className="input-field" placeholder="Note title..." type="text" id="title" name="title" />
-        </div>
-        <br />
+          </div>
+          <br />
 
-        <div className="input-container">
+          <div className="input-container">
             <select onClick={handleNoteBook} className="input-field">
             {notebooks.map(notebook =>
               <option key={notebook.id} value={notebook.id}>{notebook.title}</option>

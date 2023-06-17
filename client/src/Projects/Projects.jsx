@@ -22,6 +22,11 @@ const Projects = () => {
     fetchData();
   }, [currentUser.id])
 
+  const deleteProject = (projectId) => {
+    axios.delete(`/projects/${projectId}`)
+    setProjects(projects.filter(project => project.id !== projectId))
+  }
+
   return (
     <div className='container'>
       <Navbar />
@@ -63,7 +68,7 @@ const Projects = () => {
                   <Link to={`/edit-project/${project.id}`}> 
                     <i className='fa fa-edit'></i>
                   </Link> 
-                  <i className='fa fa-trash'></i>  
+                  <i onClick={() => deleteProject(project.id)} className='fa fa-trash'></i>  
                 </div> 
               </div>
               

@@ -32,7 +32,6 @@ export const getProject = (request, response) => {
     const { id } =  request.params;
     const q = "SELECT * FROM projects WHERE id = ?";
     db.query(q, id, (err, result )=> {
-        console.log(result)
         response.send(result)
         // console.log(response)
     });
@@ -50,10 +49,17 @@ export const editProject = (request, response) => {
         project_data[0].id],  
         (err, result) => {
         if(err) {
-            console.log(err)
             response.send({'error': err.message})
         } else {
             response.send({'success':'Successfully edited the project!'})
         }     
+    })
+};
+
+export const deleteProject = (request, response) => {
+    const { id } =  request.params
+    const q = "DELETE FROM projects WHERE id = ?"
+    db.query(q, id, (err, result) => {
+        response.send(result)
     })
 };
