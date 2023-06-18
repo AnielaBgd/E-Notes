@@ -26,19 +26,17 @@ const Note = () => {
     <div className='container'>
         <Navbar />
         <div className='main-content'>
-            <h1>{note.note_title ? note.note_title : "" }</h1>
-        <div className='assistant-notebook'> 
+        <div className='assistant-button'> 
             <Link to="/notes"> 
                 <i className='fa fa-arrow-left'>Go back</i>
             </Link>
         </div>
         <div className='note-container'>
+          <h1>Title: {note.note_title}</h1>
           <hr />
-          <h3>Notebook Title: {note.notebook_title}</h3>
-          <br />
+          <h2 className='notebook-name'>Notebook name: {note.notebook_title}</h2>
           <hr />
           <div className='note-content'>
-            {/* <div>{typeof(note.note_content) === 'string' && parse(note.note_content)}</div> */}
             <p>{parse(String(note.note_content))}</p>
           </div>
         </div>

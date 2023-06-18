@@ -12,20 +12,6 @@ const EditTask = () => {
     const [memberName, setMemberName] = useState('')
     const [projectId, setProjectId] = useState([])
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //       try{
-    //         console.log(params.id)
-    //         const res = await axios.get(`/tasks/get-task/${params.id}`);
-    //         setTaskTitle(res.data[0].title)
-    //         console.log(res.data[0])
-    //       } catch (err) {
-    //         console.log(err);
-    //       }
-    //     };
-    //     fetchData();
-    //   }, [params.id]);
-
       useEffect(()=> {
         if(params.id) {
             axios.get(`/tasks/get-task/${params.id}`) 
@@ -73,19 +59,23 @@ const EditTask = () => {
         <div className='main-content'>
             <h1>Edit task</h1>
             <hr />
-            <div className="assistant-notebook">
+            <div className="assistant-button">
             <Link to={`/project/${params.id}`}>
                 <i className='fa fa-arrow-left'> Go back</i>
             </Link>
+            </div>
             <form className='form-container' onSubmit={submitTask}>
                 <div className="input-container">
+                    <h4>Task name</h4>
                     <input className="input-field" value={taskTitle} onChange={handleTitle} placeholder="Task name" type="text" id="title" name="title" />
                 </div>
                 <br />
                 <div className="input-container">
+                    <h4>Assigned to</h4>
                     <input className="input-field" value={memberName} onChange={handleMember} placeholder="Member name" type="text" id="title" name="title" />
                 </div>
-                <span>Project status:</span>
+                <br />
+                <h4>Project status:</h4>
                 <select className="input-field" value={taskStatus}  onChange={ (e) => {
                     setTaskStatus(e.target.value)} }>
                     {status.map( options => 
@@ -93,11 +83,12 @@ const EditTask = () => {
                 </select>
                 <br />
                 <br />
+                <br />
+                <br />
                 <div className="input-container">
                     <button className="login-btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i> Add task</button>
                 </div>
             </form>
-        </div>
         </div>
       
     </div>

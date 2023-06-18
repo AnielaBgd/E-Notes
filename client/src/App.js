@@ -7,9 +7,9 @@ import Home from './Home/Home'
 import Welcome from './Components/Welcome'
 import Register from './Register/Register'
 import Login from './Login/Login'
-import Favorites from './Favorites/Favorites'
-import Settings from './Settings/Settings'
-import Trash from './Trash/Trash'
+import Favourites from "./Favourites/Favourites.jsx"
+// import Settings from './Settings/Settings'
+// import Trash from './Trash/Trash'
 import Notebooks from './Notebooks/Notebooks'
 import AddNotebook from './Notebooks/AddNotebook.jsx'
 import Notebook from './Notebooks/Notebook.jsx'
@@ -39,9 +39,9 @@ function App() {
           <Route path="/" element={currentUser ? <Home /> : <Welcome/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/trash" element={<Trash />} />
+          <Route path="/favourites" element={<Favourites />} />
+          {/* <Route path="/settings" element={<Settings />} /> */}
+          {/* <Route path="/trash" element={<Trash />} /> */}
 
           <Route path="/notebooks" element={<Notebooks />} />
           <Route path="/add-notebook" element={<AddNotebook />}></Route>
@@ -61,7 +61,7 @@ function App() {
           <Route path="/add-task/:id" element={<Task />}/>
           <Route path="/edit-task/:id" element={<EditTask />}/>
         </Routes>
-
+        
         <Footer />
       </div>
     </Router>

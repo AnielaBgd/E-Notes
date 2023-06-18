@@ -3,13 +3,10 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
 import { AuthContext } from '../Context/authContext'
 import axios from 'axios'
-import parse from 'html-react-parser'
 import Tiptap from '../Components/Tiptap'
 import { validateRequiredInputs } from '../Components/Utils'
 
-
 const EditNote = () => {
-  // const [note, setNote] = useState({})
   const [noteTitle, setNoteTitle] = useState('')
   const [noteContent, setNoteContent] = useState('')
   const [noteEditorContent, setNoteEditorContent] = useState('')
@@ -72,56 +69,51 @@ const EditNote = () => {
       }
     ]
     setIsSubmitted(true)
-
-    // if (!validateRequiredInputs(formData)) {
-    //   setError('Please fill in all fields!')
-    //   return false 
-    // } else {
-      formData[0].note_id = parseInt(params.id)
-      console.log(formData)
-      console.log(formData[0].noteEditorContent)
-      axios.put('/notes/edit-note', formData) 
-      .then(response => {
-        //Clear form data and state
-        e.target.reset()
-        setNoteTitle(null)
-        // setNoteContent(null)
-        setNoteEditorContent(null)
-        setNotebook(null)
-        setError('')
-        //Navigate back to notebooks
-        navigate('/notes')
+    formData[0].note_id = parseInt(params.id)
+    console.log(formData)
+    console.log(formData[0].noteEditorContent)
+    axios.put('/notes/edit-note', formData) 
+    .then(response => {
+      //Clear form data and state
+      e.target.reset()
+      setNoteTitle(null)
+      // setNoteContent(null)
+      setNoteEditorContent(null)
+      setNotebook(null)
+      setError('')
+      //Navigate back to notebooks
+      navigate('/notes')
       })
-      
-      // }
-    }
+  }
   
-
   return (
     <div className='container'>
       <Navbar />
       <div className='main-content'>
-        <h1>Edit Note</h1>
-        <div className='assistant-notebook'> 
+          <h1>Edit Note</h1>
+          <hr />
+          <div className='assistant-button'> 
           <Link to="/notes"> 
             <i className='fa fa-arrow-left'> Go back</i>
           </Link>
-
-          <div className="editor">
-            <Tiptap 
-              handleEditorContent={handleEditorContent}
-              submitted={submitted}
-              noteContent= {noteContent}
-              />
           </div>
 
+          <div className="editor">
+          <Tiptap 
+            handleEditorContent={handleEditorContent}
+            submitted={submitted}
+            noteContent= {noteContent}
+          />
+          </div>
+          <>
           <form className='form-container' onSubmit={submitNote}>
             <div className='input-container'>
+              <h4>Title</h4>
               <input value= {noteTitle} onChange={handleTitle} className='input-field' type="text" id="title" name="title"></input>
             </div>
             <br />
-
             <div className='input-container'>
+              <h4>Select notebook</h4>
               <select value={notebook} onClick={handleNotebook} className="input-field">
               {notebooks.map(notebook =>
               <option key={notebook.id} value={notebook.id}>{notebook.title}</option>
@@ -129,15 +121,12 @@ const EditNote = () => {
               </select>
             </div>
             <br />
-
+            <br />
             <div className="input-container">
               <button className="login-btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i> Edit note</button>
             </div>
-
           </form>
-
-      </div>
-      <br />
+          </>
       </div>
     </div>
   )

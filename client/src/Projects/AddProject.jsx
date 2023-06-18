@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
 import axios from 'axios'
 import { AuthContext } from '../Context/authContext'
-import { validateRequiredInputs } from '../Components/Utils'
 
 const AddProject = () => {
     const navigate = useNavigate()
@@ -40,31 +39,33 @@ const AddProject = () => {
     <div className='container'>
       <Navbar />
       <div className='main-content'>
-        <h1>Add project</h1>
+        <h1>Plan project</h1>
         <hr />
-
-        <div className="assistant-notebook">
+        <div className="assistant-button">
             <Link to="/projects"> 
                 <i className='fa fa-arrow-left'> Go back</i>
             </Link>
         </div>
         <br />
-
         <form className="form-container" onSubmit={submitProject}>
             <div className="input-container">
+                <h4>Project name</h4>
                 <input className="input-field" onChange={handleTitle} placeholder="Project name" type="text" id="title" name="title" />
             </div>
-
+            <br />
             <div className="input-container">
-                <input className="input-field" onChange={handleDescription} placeholder="Project description" type="text" id="title" name="description" />
+                <h4>Description</h4>
+                <textarea className="input-field" onChange={handleDescription} placeholder="Project description" type="text" id="title" name="description" />
             </div>
-
-            <span>Project status:</span>
+            <br />
+            <h4>Project status:</h4>
             <select className="input-field"  onChange={ (e) => {
                 setProjectStatus(e.target.value)} }>
             {status.map( options => 
                 <option>{options}</option>)}
             </select>
+            <br />
+            <br />
             <br />
             <br />
             <div className="input-container">

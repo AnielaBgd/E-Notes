@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Navbar from '../Components/Navbar'
@@ -10,19 +10,6 @@ const AddTask = () => {
     const status = ['NOT STARTED', 'IN PROGRESS', 'COMPLETED']
     const [taskTitle, setTaskTitle] = useState('')
     const [memberName, setMemberName] = useState('')
-    const [project, setProject] = useState([])
-    useEffect(() => {
-        const fetchData = async () => {
-          try{
-            const res = await axios.get(`/projects/get-project/${params.id}`);
-            setProject(res.data)
-          } catch (err) {
-            console.log(err);
-          }
-        };
-        fetchData();
-      }, [params.id]);
-
 
     const handleTitle = (e) => {
         e.preventDefault()
@@ -54,22 +41,26 @@ const AddTask = () => {
         <div className='main-content'>
             <h1>Add task</h1>
             <hr />
-            <div className="assistant-notebook">
+            <div className="assistant-button">
             <Link to="/projects"> 
                 <i className='fa fa-arrow-left'> Go back</i>
             </Link>
+            </div>
             <form className='form-container' onSubmit={submitTask}>
                 <div className="input-container">
+                    <h4>Name</h4>
                     <input className="input-field" onChange={handleTitle} placeholder="Task name" type="text" id="title" name="title" />
                 </div>
                 <br />
                 <div className="input-container">
+                    <h4>Assigned to</h4>
                     <input className="input-field" onChange={handleMember} placeholder="Member name" type="text" id="title" name="title" />
                 </div>
-                <span>Project status:</span>
+                <br />
+                <h4>Task status:</h4>
                 <select className="input-field"  onClick={ (e) => {
-                    setTaskStatus(e.target.value)} }>
-                    {status.map( options => 
+                setTaskStatus(e.target.value)} }>
+                {status.map( options => 
                     <option>{options}</option>)}
                 </select>
                 <br />
@@ -78,7 +69,6 @@ const AddTask = () => {
                     <button className="login-btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i> Add task</button>
                 </div>
             </form>
-        </div>
         </div>
       
     </div>

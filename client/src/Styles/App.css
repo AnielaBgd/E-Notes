@@ -12,6 +12,15 @@ a {
     color:#3E7D3E; 
 }
 
+h1, h3 {
+  text-align: center;
+}
+
+h1, h2, h3, h4 {
+  font-weight:200;
+  color: #3E7D3E;
+}
+
 .container {
     display: flex;
     flex-direction: row;
@@ -21,6 +30,113 @@ a {
 
 .main-content {
     flex: 80%;
+}
+
+.main-content .assistant-button i{
+  text-align: center;
+  background: #3E7D3E;
+  display: inline-block;
+  color: #fff; 
+  padding: 1%;
+  margin-top:10px;
+  width:10%;
+  transition: width 1s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+}
+
+.main-content .assistant-button i:hover{
+  cursor:pointer;
+  width:12%; 
+}
+
+.main-content form.form-container {
+  width: 50%;
+  margin: 50px auto;
+}
+
+.card-container .card-item .card-actions .login-btn {
+  width: 60%;
+  padding:10px 15px;
+  margin-top: 10px;
+  float:left;
+}
+
+
+
+
+
+
+
+
+
+.card-container {
+  width: 80%;
+  margin: 30px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 0;
+}
+
+.card-item {
+  width:250px;
+  padding: 2%;
+  background:#E6E6E6;
+  margin:10px;
+  height:350px;
+  overflow: hidden;
+  border:1px solid #3E7D3E;
+  position: relative;
+}
+
+.card-actions {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-actions i {
+  margin-right: 15px;
+  font-size: 22px;
+  color: #3E7D3E;
+}
+
+.card-actions i:hover {
+  cursor: pointer;
+}
+
+.card-container .card-item .card-actions .login-btn {
+  width: 60%;
+  padding:10px 15px;
+  margin-top: 10px;
+  float:left;
+}
+
+.main-content form.form-container {
+  width: 50%;
+  margin: 50px auto;
+}
+
+.note-content {
+  font-size: 15px;
+  padding: 20px;
+}
+
+.notebook-name {
+  margin-left: 20px;
+}
+
+.card-item .input-container .login-btn {
+  margin: 0;
+  position: relative;
+  /* margin-top: 190px; */
+  padding: 2px;
+  border: 1px solid darkgreen;
+}
+
+.favourite {
+  color: #D21404 !important; 
 }
 
 
@@ -51,7 +167,7 @@ a {
     border-right: none;
   }
 
-  .main-content .assistant-notebook i{
+  .main-content .assistant-button i{
     width: 98%;
     padding:3%;
     margin-top:30px;

@@ -8,17 +8,33 @@ import { AuthContext } from '../Context/authContext'
 const AddNotebook = () => {
     const navigate = useNavigate()
     const [title, setTitle] = useState(null)
+    const [description, setDescription] = useState(null)
     const [error, setError] = useState(null)
     const { currentUser } = useContext(AuthContext);
 
     const handleTitle = (e) => {
-        setTitle(e.target.value)
-    }
+        if (e.target.value.length < 255){
+          setError(null)
+          setTitle(e.target.value)
+        } else {
+              setError('Please write a shorter title')
+          }
+      }
+    
+      const handleDescription = (e) => {
+        if (e.target.value.length < 255){
+          setError(null)
+          setDescription(e.target.value)
+          } else {
+              setError('Please write a shorter description')
+          }
+       }
      
     const submitNoteBook = (e) => {
         e.preventDefault()
         let formData = [ 
-            {'title': title}
+            {'title': title,
+             'description': description}
         ]
      
         if (!validateRequiredInputs(formData)) {
@@ -44,8 +60,8 @@ const AddNotebook = () => {
             <Navbar />
             <div className='main-content'>
                 <h1>Add a new notebook</h1>
-
-                <div className='assistant-notebook'> 
+                <hr />
+                <div className='assistant-button'> 
                     <Link to="/notebooks"> 
                         <i className='fa fa-arrow-left'> Go back</i>
                     </Link>
@@ -53,7 +69,10 @@ const AddNotebook = () => {
 
             <form className="form-container" onSubmit={submitNoteBook}>
                 <div className="input-container">
-                    <input onChange={handleTitle} className="input-field" placeholder="Notebook title..." type="text" id="title" name="title" />
+                    <input onChange={handleTitle} className="input-field" placeholder="Notebook title" type="text" id="title" name="title" />
+                </div>
+                <br /><div className="input-container">
+                    <textarea cols="60" rows="5" onChange={handleDescription} className="input-field" placeholder="Notebook description" type="text" id="title" name="title" />
                 </div>
                 <br />
                 <div className="input-container">

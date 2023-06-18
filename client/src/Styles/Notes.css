@@ -1,4 +1,4 @@
-.main-content form.form-container {
+/* .main-content form.form-container {
     width: 50%;
     margin: 50px auto;
   }
@@ -36,7 +36,7 @@
   .notes-container .notes-item .note-actions .note-actions-items {
     width:40%;
     font-size: 22px;
-    color: #3E7D3E;
+    color: red;
     float:right;
     margin-top:20px;
     text-align: right;
@@ -44,4 +44,4 @@
   
   .notes-container .notes-item .note-actions .note-actions-items i:first-child{
     margin-right: 5px;
-  }
+  } */

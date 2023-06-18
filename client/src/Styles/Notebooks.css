@@ -1,10 +1,10 @@
-.main-content .assistant-notebook i{
+/* .main-content .assistant-notebook i{
     text-align: center;
     background: #3E7D3E;
     display: inline-block;
     color: #fff; 
     padding: 1%;
-    /* font-weight:100; */
+    font-weight:100;
     margin-top:10px;
     width:10%;
     transition: width 1s;
@@ -14,9 +14,9 @@
 .main-content .assistant-notebook i:hover{
     cursor:pointer;
     width:12%; 
-}
+} */
 
-.main-content .notebooks {
+/* .main-content .notebooks {
     display: flex;
     justify-content: space-between;
     color: #fff; 
@@ -28,13 +28,13 @@
 }
   
 .main-content h1 {
-    /* color: #3E7D3E; */
+    color: #3E7D3E;
     text-align: center;
     font-weight: 200;
 }
 
 .main-content .notebooks:hover {
-    /* background: #004225 !important; */
+    background: #004225 !important;
       box-shadow: 0px 1px 2px 0px rgba(0,66,37, 0.7),
             1px 2px 4px 0px rgba(0,66,37,0.7),
             2px 4px 8px 0px rgba(0,66,37,0.7),
@@ -79,4 +79,4 @@
     padding:3%;
     margin-top:10px;
     text-align: center;
-}
+} */

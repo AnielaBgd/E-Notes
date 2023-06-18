@@ -8,6 +8,7 @@ export const register = (request, response) => {
   const email = request.body[2].email
   const created_at = new Date().toJSON().slice(0, 10).toString()
 
+
   db.query(
       "SELECT username FROM users WHERE username = ?",
       [username],
@@ -28,6 +29,7 @@ export const register = (request, response) => {
           }
       }
   )
+
 };
 
 
@@ -65,6 +67,8 @@ export const login = (request, response) => {
         }
     )
 };
+
+
 
 export const logout = (request, response) => {
     response.clearCookie("access_token", {

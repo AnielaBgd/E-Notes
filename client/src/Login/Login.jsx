@@ -7,13 +7,15 @@ import '../Styles/Authentication.css'
 const Login = () => {
 
   const navigate = useNavigate()
-  const [username, setUsername] = useState(null)
+  const [username, setUsername] = useState({})
   const [password, setPassword] = useState(null)
   const [error, setError] = useState('')
 
   const { login } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
   const handleUsername = (e) => {
+    // console.log(e.target.value)
     setUsername(e.target.value)
   }
   const handlePassword = (e) => {
@@ -33,9 +35,10 @@ const Login = () => {
      } else {
       try{
         await login(formData)
-        navigate("/");
+        navigate("/")
       }catch(error){
         setError(error.response.data);
+        // console.log(error)
       } 
   }
   }

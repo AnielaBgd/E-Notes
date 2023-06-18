@@ -41,6 +41,25 @@ export const getNotes = (request, response) => {
     })
 };
 
+export const getFavouriteNotes = (request, response) => {
+    const { userId } = request.params;
+    
+    const q = `SELECT nts.id, 
+    nts.title as 'note_title',
+    nts.note_content as 'note_content', 
+    nts.is_favourite as 'is_favourite',
+    nts.author as 'author',
+    ntbks.title as 'notebook_title'
+    FROM e_notes_db.notes AS nts
+    JOIN e_notes_db.notebooks as ntbks
+    ON nts.notebook_id = ntbks.id AND author = (?) AND nts.is_favourite = 1
+    ORDER by nts.id DESC`;
+
+    db.query(q, userId, (err, result) => {
+        response.send(result);
+    })
+};
+
 export const getNote = (request, response) => {
     const { id } = request.params;
 
@@ -61,18 +80,10 @@ export const getNote = (request, response) => {
 
 export const addNoteToFavourites = (request, response) => {
     const { id } = request.params;
-    const q = `SELECT nts.id, 
-    nts.title as 'note_title',
-    nts.note_content as 'note_content', 
-    nts.is_favourite as 'is_favourite',
-    nts.author as 'author',
-    ntbks.title as 'notebook_title'
-    FROM e_notes_db.notes AS nts
-    JOIN e_notes_db.notebooks as ntbks
-    ON nts.notebook_id = ntbks.id
-    ORDER by nts.id DESC`;
+    const q = 'SELECT * from notes where id = ?';
 
     db.query(q, id, (err, result) => {
+        console.log(err)
         if(result[0].is_favourite === 1) {
             const sqlUpdateForZero = "UPDATE notes SET is_favourite = 0 WHERE id = ?"
             db.query(sqlUpdateForZero, id, (err, result) => {
@@ -105,3 +116,24 @@ export const editNote = (request, response) => {
         response.send(result);
     })
 };
+
+export const getNotesForNotebook = (request, response) => {
+    const { id } = request.params;
+    const q = `SELECT nts.id, 
+    nts.title as 'note_title',
+    nts.note_content as 'note_content', 
+    nts.is_favourite as 'is_favourite'
+    FROM e_notes_db.notes AS nts
+    JOIN e_notes_db.notebooks as ntbks
+    ON nts.notebook_id = ntbks.id WHERE nts.notebook_id = ?
+    ORDER by nts.id DESC`
+
+    db.query(q, id, (err, result )=> {
+        console.log(err)
+        response.send(result)
+        console.log(result)
+    });
+
+};
+
+

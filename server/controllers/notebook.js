@@ -8,6 +8,14 @@ export const getNotebooks = (request, response) => {
     });
 };
 
+export const getFavouriteNotebooks = (request, response) => {
+    const { userId } = request.params;
+    const q = "SELECT * FROM notebooks WHERE created_by = (?) AND is_favourite = 1  ORDER BY id DESC";
+    db.query(q, userId, (err, result )=> {
+        response.send(result)
+    });
+};
+
 
 export const getNotebook = (request, response) => {
     const { id } =  request.params;
@@ -21,9 +29,9 @@ export const createNotebook = (request, response) => {
     const notebook_data = request.body
     const created_at = new Date().toJSON().slice(0, 10).toString()
    
-    const q = "INSERT INTO notebooks(title, created_by, created_at) VALUES(?,?,?)"
+    const q = "INSERT INTO notebooks(title, created_by, created_at, description) VALUES(?,?,?,?)"
     db.query(q, 
-        [notebook_data[0].title, notebook_data[0].author, created_at],  
+        [notebook_data[0].title, notebook_data[0].author, created_at, notebook_data[0].description],  
         (err, result) => {
         if(err) {
             response.send({'error': err.message})
@@ -37,9 +45,9 @@ export const editNotebook = (request, response) => {
     const notebook_data = request.body
     const updated_at = new Date().toJSON().slice(0, 10).toString()
 
-    const q = "UPDATE notebooks SET title = ?, updated_at = ? WHERE id = ?"
+    const q = "UPDATE notebooks SET title = ?, updated_at = ?, description = ? WHERE id = ?"
     db.query(q, 
-        [notebook_data[0].title, updated_at, notebook_data[0].notebook_id],  
+        [notebook_data[0].title, updated_at, notebook_data[0].description, notebook_data[0].notebook_id ],  
         (err, result) => {
         if(err) {
             response.send({'error': err.message})

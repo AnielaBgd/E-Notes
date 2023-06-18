@@ -188,9 +188,6 @@ const Tiptap = (props) => {
       editor.commands.setContent(props.noteContent)
     }  
   }, [props.noteContent])
-  // if (props.noteContent){
-  //   editor.commands.setContent(props.noteContent)
-  // }
 
   if(props.submitted) {
     editor.commands.clearContent()

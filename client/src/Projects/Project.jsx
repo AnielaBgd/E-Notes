@@ -5,6 +5,7 @@ import Navbar from '../Components/Navbar'
 
 const Project = () => {
   const [project, setProject] = useState(null)
+  const [projectTitle, setProjectTitle] = useState('')
   const [tasks, setTasks] = useState([])
   const params = useParams()
 
@@ -14,7 +15,8 @@ const Project = () => {
     if(params.id) {
         axios.get(`/projects/get-project/${params.id}`) 
         .then((response) => {
-            setProject(response.data[0])
+            console.log(response.data[0])
+            setProjectTitle(response.data[0].title)
         }) 
         .catch(err => console.log(err))
 
@@ -41,9 +43,9 @@ const Project = () => {
     <div className="container">
         <Navbar />
         <div className="main-content">
-            <h1>Your project</h1>
+            <h1>{projectTitle}</h1>
             <hr />
-            <div className="assistant-notebook">
+            <div className="assistant-button">
                 <Link to="/projects"> 
                   <i className='fa fa-arrow-left'> Go back</i>
                 </Link>
@@ -54,31 +56,23 @@ const Project = () => {
                 </Link>
             </div>
             <br />
-            <div className='notes-container'>
+            <div className='card-container'>
               {tasks.length ? (tasks.map(task => 
 
-                <div key={task.id} className='notes-item'>
-                  <div className='task'>
-                    <label>Task name: </label>
-                    <span>{task.name}</span>
+                <div key={task.id} className='card-item'>
+                  <p className='card-actions'> 
+                    <Link to={`/edit-task/${task.id}`}>
+                      <i className='fa fa-edit'></i>
+                    </Link> 
+                    <i onClick={() => deleteTask(task.id)} className='fa fa-trash'></i>  
+                    </p>
+                    <hr />
+                    <h3>{task.name}</h3>
                     <br />
-                    <label>Assigned to:</label>
-                    <span>{task.member}</span>
+                    <h4>Assigned to: {task.member}</h4>
                     <br />
-                    <label>Task status:</label>
-                    <span>{task.status}</span>
-                  </div>
-                  <div className='note-actions'>
-                    <div className='note-actions-items'> 
-                      <Link to={`/edit-task/${task.id}`}>
-                        <i className='fa fa-edit'></i>
-                      </Link> 
-                      <i onClick={() => deleteTask(task.id)} className='fa fa-trash'></i>  
-                    </div> 
-                  </div>
-                  
+                    <h4>Task status: {task.status}</h4>                    
                 </div>
-                
               )) : (<p className='not-found'><i className='fa fa-info-circle'></i> No tasks added yet.</p>)}
 
             </div>

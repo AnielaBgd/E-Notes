@@ -4,9 +4,8 @@ import '../Styles/Header.css'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Context/authContext';
 
-const Header = (props) => { 
+const Header = () => { 
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
   return (
     <header>
         <Link className="logo" to="/"> 

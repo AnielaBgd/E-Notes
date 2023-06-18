@@ -8,8 +8,8 @@ const EditProject = () => {
     const navigate = useNavigate()
     const [projectStatus, setProjectStatus] = useState('')
     const status = ['NOT STARTED', 'IN PROGRESS', 'COMPLETED']
-    const [projectTitle, setProjectTitle] = useState('')
-    const [projectDescription, setProjectDescription] = useState('')
+    const [title, setProjectTitle] = useState('')
+    const [description, setProjectDescription] = useState('')
 
     useEffect(()=> {
         if(params.id) {
@@ -19,7 +19,6 @@ const EditProject = () => {
                 setProjectTitle(response.data[0].title)
                 setProjectDescription(response.data[0].description)
                 setProjectStatus(response.data[0].status)
-                console.log(projectTitle)
             }) 
             .catch(err => console.log(err))
         }
@@ -27,19 +26,17 @@ const EditProject = () => {
 
     const handleTitle = (e) => {
         setProjectTitle(e.target.value)
-        // console.log(projectTitle)
     }
 
     const handleDescription = (e) => {
         setProjectDescription(e.target.value)
-        // console.log(projectDescription)
     }
 
     const submitProject = (e) => {
         e.preventDefault()
         let formData = [
-            {'title': projectTitle,
-             'description': projectDescription,
+            {'title': title,
+             'description': description,
              'status': projectStatus
             }
         ]
@@ -58,7 +55,7 @@ const EditProject = () => {
         <h1>Edit project</h1>
         <hr />
 
-        <div className="assistant-notebook">
+        <div className="assistant-button">
             <Link to="/projects"> 
                 <i className='fa fa-arrow-left'> Go back</i>
             </Link>
@@ -67,14 +64,16 @@ const EditProject = () => {
 
         <form className="form-container" onSubmit={submitProject}>
             <div className="input-container">
-                <input className="input-field" value={projectTitle} onChange={handleTitle} placeholder="Project name" type="text" id="title" name="title" />
+                <h4>Project name</h4>
+                <input className="input-field" value={title} onChange={handleTitle} placeholder="Project name" type="text" id="title" name="title" />
             </div>
-
+            <br />
             <div className="input-container">
-                <input className="input-field" value={projectDescription} onChange={handleDescription} placeholder="Project description" type="text" id="title" name="description" />
+                <h4>Description</h4>
+                <input className="input-field" value={description} onChange={handleDescription} placeholder="Project description" type="text" id="title" name="description" />
             </div>
-
-            <span>Project status:</span>
+            <br />
+            <h4>Project status:</h4>
             <select className="input-field" value={projectStatus} onChange={ (e) => {
                 setProjectStatus(e.target.value)
                 console.log(projectStatus)} }>
@@ -83,8 +82,10 @@ const EditProject = () => {
                 </select>
                 <br />
                 <br />
+                <br />
+                <br />
                 <div className="input-container">
-                    <button className="login-btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i> Add project</button>
+                    <button className="login-btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i> Edit project</button>
                 </div>
         </form>
 
