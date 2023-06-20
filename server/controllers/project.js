@@ -21,7 +21,6 @@ export const addProject = (request, response) => {
 
 export const getProjects = (request, response) => {
     const { id } = request.params;
-    // console.log(request.params)
     const q = "SELECT * FROM projects WHERE userId = (?) ORDER BY id DESC";
     db.query(q, id, (err, result) => {
         response.send(result)
@@ -30,7 +29,6 @@ export const getProjects = (request, response) => {
 
 export const getFavouriteProjects = (request, response) => {
     const { id } = request.params;
-    // console.log(request.params)
     const q = "SELECT * FROM projects WHERE userId = (?) AND is_favourite = 1 ORDER BY id DESC";
     db.query(q, id, (err, result) => {
         response.send(result)
@@ -42,13 +40,11 @@ export const getProject = (request, response) => {
     const q = "SELECT * FROM projects WHERE id = ?";
     db.query(q, id, (err, result )=> {
         response.send(result)
-        // console.log(response)
     });
 };
 
 export const editProject = (request, response) => {
     const project_data = request.body
-    // const updated_at = new Date().toJSON().slice(0, 10).toString()
 
     const q = "UPDATE projects SET title=?, description=?, status=? WHERE id =?";
     db.query(q, 

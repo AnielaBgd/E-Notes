@@ -32,7 +32,7 @@ const EditNotebook = () => {
   }
 
   const handleDescription = (e) => {
-    if (e.target.value.length < 255){
+    if (e.target.value.length < 200){
       setError(null)
       setDescription(e.target.value)
       } else {

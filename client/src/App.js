@@ -2,14 +2,11 @@ import { useContext } from "react"
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import { AuthContext } from './Context/authContext.js'
 import Header from './Components/Header'
-import Footer from './Components/Footer'
 import Home from './Home/Home'
 import Welcome from './Components/Welcome'
 import Register from './Register/Register'
 import Login from './Login/Login'
 import Favourites from "./Favourites/Favourites.jsx"
-// import Settings from './Settings/Settings'
-// import Trash from './Trash/Trash'
 import Notebooks from './Notebooks/Notebooks'
 import AddNotebook from './Notebooks/AddNotebook.jsx'
 import Notebook from './Notebooks/Notebook.jsx'
@@ -40,9 +37,6 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/favourites" element={<Favourites />} />
-          {/* <Route path="/settings" element={<Settings />} /> */}
-          {/* <Route path="/trash" element={<Trash />} /> */}
-
           <Route path="/notebooks" element={<Notebooks />} />
           <Route path="/add-notebook" element={<AddNotebook />}></Route>
           <Route path="/edit-notebook/:id" element={<EditNotebook />}></Route>
@@ -62,7 +56,6 @@ function App() {
           <Route path="/edit-task/:id" element={<EditTask />}/>
         </Routes>
         
-        <Footer />
       </div>
     </Router>
   );

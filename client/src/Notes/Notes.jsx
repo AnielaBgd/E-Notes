@@ -8,6 +8,8 @@ import axios from 'axios'
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
+  const [data, setData] = useState('')
+  const [initialNotes, setInitialNotes] = useState([])
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -16,15 +18,14 @@ const Notes = () => {
         if (currentUser.id) {
         const res = await axios.get(`/notes/get-notes/${currentUser.id}`);
         setNotes(res.data);
-        console.log(res.data)
-        console.log(notes);
+        setInitialNotes(res.data)
         }
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, []);
+  }, [currentUser.id]);
 
   const deleteNote = (noteId) => { 
     axios.delete(`/notes/delete-note/${noteId}`)
@@ -41,10 +42,28 @@ const Notes = () => {
     }
   }
 
+  const handleChange = (e) => {
+    e.preventDefault()
+    setData(e.target.value)
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    if(data === '') {
+      setNotes(initialNotes)
+      return false
+    }
+    if (notes.length) {
+      setNotes(notes.filter(note => note.note_title.toLowerCase() === data.toLowerCase()))
+    }
+  }
+
   return (
     <div className='container'>
       <Navbar />
       <div className='main-content'>
+        <input type='text' className='search-bar' onChange={handleChange} placeholder='Serach...' />
+        <button onClick={handleClick} className='search-button'>Search</button>
         <h1>Your notes</h1>
         <hr />
         <div className='assistant-button'> 
@@ -73,8 +92,11 @@ const Notes = () => {
               <hr />
               <div>
               <h3>{note.notebook_title}</h3>
-                <br />
-                {note.note_content.length > 200 ? parse(note.note_content.substring(0, 100) + ' ...') : parse(note.note_content)}
+              <br />
+              {note.note_content.length > 200 ? parse(note.note_content.substring(0, 200) + ' ...') : parse(note.note_content)}
+              <br />
+              <h4>Created at: {note.created_at.slice(0, 10).toString()}</h4>
+              {note.last_modified && <h4>Last modified: {note.last_modified.slice(0, 10).toString()}</h4>}
               </div>
               
             </div>

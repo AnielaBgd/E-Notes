@@ -61,14 +61,6 @@ h1, h2, h3, h4 {
   float:left;
 }
 
-
-
-
-
-
-
-
-
 .card-container {
   width: 80%;
   margin: 30px auto;
@@ -137,6 +129,21 @@ h1, h2, h3, h4 {
 
 .favourite {
   color: #D21404 !important; 
+}
+
+.search-bar {
+  border: 1px solid #3E7D3E;
+  width: 20%;
+  padding: 10px;
+  margin-left: 73%;
+}
+
+.search-button {
+  border: 1px solid #3E7D3E;
+  padding: 10px;
+  background-color: #3E7D3E;
+  color: #fff;
+  margin-left: 5px;
 }
 
 

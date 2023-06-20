@@ -22,7 +22,7 @@ const AddNotebook = () => {
       }
     
       const handleDescription = (e) => {
-        if (e.target.value.length < 255){
+        if (e.target.value.length < 200){
           setError(null)
           setDescription(e.target.value)
           } else {
@@ -71,7 +71,8 @@ const AddNotebook = () => {
                 <div className="input-container">
                     <input onChange={handleTitle} className="input-field" placeholder="Notebook title" type="text" id="title" name="title" />
                 </div>
-                <br /><div className="input-container">
+                <br />
+                <div className="input-container">
                     <textarea cols="60" rows="5" onChange={handleDescription} className="input-field" placeholder="Notebook description" type="text" id="title" name="title" />
                 </div>
                 <br />

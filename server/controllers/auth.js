@@ -6,8 +6,6 @@ export const register = (request, response) => {
   const username = request.body[0].username
   const password = request.body[1].password 
   const email = request.body[2].email
-  const created_at = new Date().toJSON().slice(0, 10).toString()
-
 
   db.query(
       "SELECT username FROM users WHERE username = ?",
@@ -19,8 +17,8 @@ export const register = (request, response) => {
               const saltRounds = 10
               bcrypt.hash(password, saltRounds, (err, hash)=>{
                   db.query(
-                      "INSERT INTO users (username, password, email, created_at) VALUES(?,?,?,?)",
-                      [username, hash, email, created_at],
+                      "INSERT INTO users (username, password, email) VALUES(?,?,?)",
+                      [username, hash, email],
                       (error, result) => {
                           response.send({"status": response.statusCode})
                       }
@@ -35,16 +33,11 @@ export const register = (request, response) => {
 
 export const login = (request, response) => {
     const username = request.body[0].username
-    const password = request.body[1].password 
- 
+    const password = request.body[1].password
+    
     db.query(
-        "SELECT * FROM users WHERE username = ?",
-        [username],
+        "SELECT * FROM users WHERE username = ?",[username],
         (error, result) => {
-            if (error) {
-                response.send({err: err})
-            }
-
             if (result.length > 0) {
                 bcrypt.compare(password, result[0].password, (errCompare, resCompare)=> {
                     if (resCompare) {
@@ -58,7 +51,7 @@ export const login = (request, response) => {
                         .status(200)
                         .json(other);
                     } else {
-                        response.send({"message": "Wrong username or password"})
+                        response.send({message: "Wrong username or password" })
                     }
                 })
             } else {

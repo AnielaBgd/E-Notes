@@ -7,6 +7,8 @@ import parse from 'html-react-parser'
 const Notebook = () => {
   const params = useParams();  
   const [notebook, setNotebook] = useState({})
+  const [data, setData] = useState('')
+  const [initialNotes, setInitialNotes] = useState([])
   const [notes, setNotes] = useState([])
 
   useEffect(()=> {
@@ -21,7 +23,7 @@ const Notebook = () => {
           try{
             const res = await axios.get(`/notes/get-notes-for-notebook/${params.id}`);
             setNotes(res.data)
-            console.log(res.data)
+            setInitialNotes(res.data)
           } catch (err) {
             console.log(err);
           }
@@ -29,15 +31,6 @@ const Notebook = () => {
         fetchNotes()
     }
   }, [params.id])
-
-  // const fetchNotes = () => {
-  //   axios.get(`/notes/get-notes-for-notebook/${params.id}`)
-  //   .then((response) => {
-  //       setNotes(response.data)
-  //       console.log(response.data)
-  //   }) 
-  //   .catch(err => console.log(err))
-  // }
 
   const deleteNote = (noteId) => { 
     axios.delete(`/notes/delete-note/${noteId}`)
@@ -54,10 +47,28 @@ const Notebook = () => {
     }
   }
 
+  const handleChange = (e) => {
+    e.preventDefault()
+    setData(e.target.value)
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    if(data === '') {
+      setNotes(initialNotes)
+      return false
+    }
+    if (notes.length) {
+      setNotes(notes.filter(note => note.note_title.toLowerCase() === data.toLowerCase()))
+    }
+  }
+
   return (
     <div className='container'>  
       <Navbar />
       <div className='main-content'>
+        <input className='search-bar' onChange={handleChange} placeholder='Serach...' />
+        <button className='search-button' onClick={handleClick}>Search</button>
         <h1>{notebook.title}</h1>
         <hr />
         <div className='assistant-button'> 

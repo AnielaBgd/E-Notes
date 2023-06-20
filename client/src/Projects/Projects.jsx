@@ -6,12 +6,15 @@ import { AuthContext } from '../Context/authContext'
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
+  const [initialProjects, setInitialProjects] = useState([])
+  const [data, setData] = useState('')
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try{
         const res = await axios.get(`/projects/get-projects/${currentUser.id}`);
+        setInitialProjects(res.data)
         setProjects(res.data)
         console.log(res.data)
       } catch (err) {
@@ -36,11 +39,28 @@ const Projects = () => {
     }
   }
 
+  const handleChange = (e) => {
+    e.preventDefault()
+    setData(e.target.value)
+  }
+
+  const handleClick = (e) => {
+    if (data === ''){
+      setProjects(initialProjects)
+      return false
+    }
+    e.preventDefault()
+    if (projects.length) {
+      setProjects(projects.filter(project => project.title.toLowerCase() === data.toLowerCase()))
+    }
+  }
+
   return (
     <div className='container'>
       <Navbar />
-
       <div className='main-content'>
+        <input className='search-bar' onChange={handleChange} placeholder='Serach...' />
+        <button className='search-button' onClick={handleClick}>Search</button>
         <h1>Your projects</h1>
         <hr />
         <div className="assistant-button">
@@ -69,8 +89,9 @@ const Projects = () => {
                 </p> 
                 <h3>{project.title}</h3>
                 <hr />
-                <h4>Task status: {project.status}</h4>
+                <h4>Project status: {project.status}</h4>
                 <h4>Description: {project.description.length > 200 ? project.description.substring(0, 200) + ' ...' : project.description}</h4>
+                <h4>Created at: {project.created_at.slice(0, 10).toString()}</h4>
             </div>
           ) 
         ) 

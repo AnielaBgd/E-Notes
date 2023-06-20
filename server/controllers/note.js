@@ -14,7 +14,6 @@ export const addNote = (request, response) => {
         created_at],  
         (err, result) => {
         if(err) { 
-            console.log(err)
             response.send({'error': err.message})
         } else {
             response.send({'success':'Successfully added new note!'})
@@ -29,6 +28,8 @@ export const getNotes = (request, response) => {
     nts.title as 'note_title',
     nts.note_content as 'note_content', 
     nts.is_favourite as 'is_favourite',
+    nts.created_at as 'created_at',
+    nts.last_modified as 'last_modified',
     nts.author as 'author',
     ntbks.title as 'notebook_title'
     FROM e_notes_db.notes AS nts
@@ -83,7 +84,6 @@ export const addNoteToFavourites = (request, response) => {
     const q = 'SELECT * from notes where id = ?';
 
     db.query(q, id, (err, result) => {
-        console.log(err)
         if(result[0].is_favourite === 1) {
             const sqlUpdateForZero = "UPDATE notes SET is_favourite = 0 WHERE id = ?"
             db.query(sqlUpdateForZero, id, (err, result) => {
@@ -129,9 +129,7 @@ export const getNotesForNotebook = (request, response) => {
     ORDER by nts.id DESC`
 
     db.query(q, id, (err, result )=> {
-        console.log(err)
         response.send(result)
-        console.log(result)
     });
 
 };

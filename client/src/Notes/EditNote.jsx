@@ -44,7 +44,7 @@ const EditNote = () => {
     fetchData();
     }
     fetchNotebooks();
-  }, [currentUser.id, params.id]); 
+  }, [currentUser.id, params.id, noteContent]); 
   
   const handleEditorContent = (value) => {
     setNoteEditorContent(value)
@@ -55,6 +55,7 @@ const EditNote = () => {
   }
 
   const handleNotebook = (e) => {
+    e.preventDefault()
     setNotebook(e.target.value)
   }
 
@@ -114,7 +115,7 @@ const EditNote = () => {
             <br />
             <div className='input-container'>
               <h4>Select notebook</h4>
-              <select value={notebook} onClick={handleNotebook} className="input-field">
+              <select defaultValue={notebook}  onClick={handleNotebook} className="input-field">
               {notebooks.map(notebook =>
               <option key={notebook.id} value={notebook.id}>{notebook.title}</option>
               )};

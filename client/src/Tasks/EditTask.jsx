@@ -75,7 +75,7 @@ const EditTask = () => {
                     <input className="input-field" value={memberName} onChange={handleMember} placeholder="Member name" type="text" id="title" name="title" />
                 </div>
                 <br />
-                <h4>Project status:</h4>
+                <h4>Task status:</h4>
                 <select className="input-field" value={taskStatus}  onChange={ (e) => {
                     setTaskStatus(e.target.value)} }>
                     {status.map( options => 

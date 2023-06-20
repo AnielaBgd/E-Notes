@@ -7,12 +7,11 @@ import '../Styles/Authentication.css'
 const Login = () => {
 
   const navigate = useNavigate()
-  const [username, setUsername] = useState({})
+  const [username, setUsername] = useState(null)
   const [password, setPassword] = useState(null)
   const [error, setError] = useState('')
 
-  const { login } = useContext(AuthContext);
-  const { currentUser } = useContext(AuthContext);
+  const { login, errorMessage} = useContext(AuthContext);
 
   const handleUsername = (e) => {
     // console.log(e.target.value)
@@ -21,6 +20,33 @@ const Login = () => {
   const handlePassword = (e) => {
     setPassword(e.target.value)
   } 
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   let formData = [ 
+  //     {'username': username},
+  //     {'password' : password},
+  //   ]
+  //   console.log('Intra aici ' + error)
+  //   if (!validateRequiredInputs(formData)) {
+  //     setError('Please fill in all fields!')
+  //     return false 
+  //    } else {
+  //     if(errorMessage) {
+  //       setError(errorMessage)
+  //     }
+  //     else{
+  //       try{
+  //       await login(formData)
+  //       navigate("/")
+  //     }catch(error){
+  //       setError(error.response.data);
+  //       // console.log(error)
+  //     }
+  //   } 
+  // }
+  // }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -34,10 +60,19 @@ const Login = () => {
       return false 
      } else {
       try{
+        console.log('aici e bine')
         await login(formData)
-        navigate("/")
+        .then(res => {
+          if(res.message) {
+            setError(res.message)
+            return false
+          }
+          else {
+            navigate("/")
+          }
+        })
       }catch(error){
-        setError(error.response.data);
+        // setError(error.response.data);
         // console.log(error)
       } 
   }

@@ -7,10 +7,12 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
+  const [errorMessage ,setErrorMessage] = useState('')
 
   const login = async (formData) => {
-    const res = await axios.post("/auth/login", formData);
-    setCurrentUser(res.data);
+    const res = await axios.post("/auth/login", formData)
+    setCurrentUser(res.data)
+    return res.data
   };
 
   const logout = async (formData) => {
@@ -23,7 +25,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout }}>
+    <AuthContext.Provider value={{ errorMessage, currentUser, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -3,16 +3,18 @@ import Navbar from '../Components/Navbar'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../Context/authContext'
 import axios from 'axios'
-import '../Styles/Notes.css'
 
 const Notebooks = () => {
   const [notebooks, setNotebooks] = useState([])
+  const [initialNotebooks, setInitialNotebooks] = useState([])
+  const [data, setData] = useState('')
   const { currentUser } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchData = async () => {
       try{
         const res = await axios.get(`/notebooks/${currentUser.id}`);
+        setInitialNotebooks(res.data)
         setNotebooks(res.data)
         console.log(res.data)
       } catch (err) {
@@ -21,6 +23,22 @@ const Notebooks = () => {
     }
     fetchData()
   }, [currentUser.id])
+
+  const handleChange = (e) => {
+    e.preventDefault()
+    setData(e.target.value)
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    if(data === '') {
+     setNotebooks(initialNotebooks)
+     return false
+    }
+    if (notebooks.length) {
+      setNotebooks(notebooks.filter(notebook => notebook.title.toLowerCase() === data.toLowerCase()))
+    }
+  }
 
   const addNotebookToFavourite = (e, notebookId) => { 
     axios.put(`/notebooks/add-notebook-to-favourite/${notebookId}`)
@@ -42,6 +60,8 @@ const Notebooks = () => {
     <div className='container'>
       <Navbar />
       <div className='main-content'>
+        <input className='search-bar' onChange={handleChange} placeholder='Serach...' />
+        <button className='search-button' onClick={handleClick}>Search</button>
         <h1>Your notebooks</h1>
         <hr />
         <div className='assistant-button'> 
@@ -70,17 +90,18 @@ const Notebooks = () => {
                 <i onClick={() => deleteNotebook(notebook.id)} className='fa fa-trash'></i> 
               </p>
               <hr />
-              <h3 className='card-title'>{notebook.title}</h3>  
+              <h3 className='card-title'>{notebook.title}</h3>
               <hr />
               <br />
-              {notebook.description.length > 200 ? (notebook.description.substring(0, 200) + ' ...') : (notebook.description)}
+              <p>{notebook.description}</p>
               <br />
+              <h4>Created at: {notebook.created_at.slice(0, 10).toString()}</h4>
+              { notebook.updated_at && <h4>Updated at: {notebook.updated_at.slice(0, 10).toString()}</h4>}
             </div>
           ) 
         ) 
         : 
         (<p className='not-found'><i className='fa fa-info-circle'></i> No notebooks added yet.</p>)}
-
         </div>
       </div>  
     </div>

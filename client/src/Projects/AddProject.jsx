@@ -9,6 +9,7 @@ const AddProject = () => {
     const [projectStatus, setProjectStatus] = useState('')
     const status = ['NOT STARTED', 'IN PROGRESS', 'COMPLETED']
     const [projectTitle, setProjectTitle] = useState('')
+    const [error, setError] = useState(null)
     const [projectDescription, setProjectDescription] = useState('')
 
     const { currentUser } = useContext(AuthContext);
@@ -18,7 +19,12 @@ const AddProject = () => {
     }
 
     const handleDescription = (e) => {
-        setProjectDescription(e.target.value)
+        if(e.target.value.length < 200){
+            setError(null)
+            setProjectDescription(e.target.value)
+        } else {
+            setError('Please write a shorter description')
+        }
     }
 
     const submitProject = (e) => {
@@ -59,7 +65,7 @@ const AddProject = () => {
             </div>
             <br />
             <h4>Project status:</h4>
-            <select className="input-field"  onChange={ (e) => {
+            <select className="input-field"  onClick={ (e) => {
                 setProjectStatus(e.target.value)} }>
             {status.map( options => 
                 <option>{options}</option>)}
@@ -71,6 +77,7 @@ const AddProject = () => {
             <div className="input-container">
                 <button className="login-btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i> Add project</button>
             </div>
+            {error && <p className='error'>{error}</p>} 
         </form>
 
     </div>

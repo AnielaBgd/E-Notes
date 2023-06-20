@@ -4,9 +4,10 @@ import axios from 'axios'
 import Navbar from '../Components/Navbar'
 
 const Project = () => {
-  const [project, setProject] = useState(null)
   const [projectTitle, setProjectTitle] = useState('')
   const [tasks, setTasks] = useState([])
+  const [InitialTasks, setInitialTasks] = useState([])
+  const [data, setData] = useState('')
   const params = useParams()
 
   console.log(params.id)
@@ -15,7 +16,6 @@ const Project = () => {
     if(params.id) {
         axios.get(`/projects/get-project/${params.id}`) 
         .then((response) => {
-            console.log(response.data[0])
             setProjectTitle(response.data[0].title)
         }) 
         .catch(err => console.log(err))
@@ -23,9 +23,8 @@ const Project = () => {
         const fetchTasks = async () => {
           try {
             const res = await axios.get(`/tasks/get-tasks/${params.id}`);
-            // console.log(res.data[0])
+            setInitialTasks(res.data)
             setTasks(res.data)
-            console.log(res.data)
           } catch (err) {
             console.log(err);
           }
@@ -39,10 +38,28 @@ const Project = () => {
     setTasks(tasks.filter(task => task.id !== taskId))
   }
 
+  const handleChange = (e) => {
+    e.preventDefault()
+    setData(e.target.value)
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    if(data === '') {
+      setTasks(InitialTasks)
+      return false
+    }
+    if (tasks.length) {
+      setTasks(tasks.filter(task => task.name.toLowerCase() === data.toLowerCase()))
+    }
+  }
+
   return (
     <div className="container">
         <Navbar />
         <div className="main-content">
+        <input className='search-bar' onChange={handleChange} placeholder='Serach...' />
+        <button className='search-button' onClick={handleClick}>Search</button>
             <h1>{projectTitle}</h1>
             <hr />
             <div className="assistant-button">

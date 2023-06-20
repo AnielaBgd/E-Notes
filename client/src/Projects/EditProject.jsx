@@ -10,6 +10,7 @@ const EditProject = () => {
     const status = ['NOT STARTED', 'IN PROGRESS', 'COMPLETED']
     const [title, setProjectTitle] = useState('')
     const [description, setProjectDescription] = useState('')
+    const [error, setError] = useState(null)
 
     useEffect(()=> {
         if(params.id) {
@@ -25,11 +26,17 @@ const EditProject = () => {
       }, [params.id])
 
     const handleTitle = (e) => {
+        e.preventDefault()
         setProjectTitle(e.target.value)
     }
 
     const handleDescription = (e) => {
-        setProjectDescription(e.target.value)
+        if(e.target.value.length < 200){
+            setError(null)
+            setProjectDescription(e.target.value)
+        } else {
+            setError('Please write a shorter description')
+        }
     }
 
     const submitProject = (e) => {
@@ -41,7 +48,6 @@ const EditProject = () => {
             }
         ]
         formData[0].id = parseInt(params.id)
-        // console.log(formData)
         axios.put('/projects/edit-project', formData).then( response => {
             e.target.reset()
             navigate('/projects')
@@ -74,12 +80,11 @@ const EditProject = () => {
             </div>
             <br />
             <h4>Project status:</h4>
-            <select className="input-field" value={projectStatus} onChange={ (e) => {
-                setProjectStatus(e.target.value)
-                console.log(projectStatus)} }>
+            <select className="input-field" defaultValue={projectStatus} onChange={ (e) => {
+                setProjectStatus(e.target.value)} }>
                 {status.map( options => 
                 <option>{options}</option>)}
-                </select>
+            </select>
                 <br />
                 <br />
                 <br />
@@ -87,8 +92,8 @@ const EditProject = () => {
                 <div className="input-container">
                     <button className="login-btn" type="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i> Edit project</button>
                 </div>
+                {error && <p className='error'>{error}</p>} 
         </form>
-
     </div>
     </div>
   )

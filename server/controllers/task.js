@@ -20,11 +20,8 @@ export const addTask = (request, response) => {
 export const getTasks = (request, response) => {
     const { id } = request.params;
     console.log(request.params)
-    // console.log(request.params)
     const q = "SELECT * FROM tasks WHERE projectId = (?) ORDER BY id DESC";
     db.query(q, id, (err, result) => {
-        // console.log(result)
-        // console.log(response)
         response.send(result)
     })
 }
@@ -32,11 +29,8 @@ export const getTasks = (request, response) => {
 export const getTask = (request, response) => {
     const { id } = request.params;
     console.log(request.params)
-    // console.log(request.params)
     const q = "SELECT * FROM tasks WHERE id = ?";
     db.query(q, id, (err, result) => {
-        // console.log(result)
-        // console.log(response)
         response.send(result)
     })
 }
