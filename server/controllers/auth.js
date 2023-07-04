@@ -41,7 +41,7 @@ export const login = (request, response) => {
             if (result.length > 0) {
                 bcrypt.compare(password, result[0].password, (errCompare, resCompare)=> {
                     if (resCompare) {
-                        const token = jwt.sign({ id:result[0].id }, "jwtkey");
+                        const token = jwt.sign({ id:result[0].id }, "jwtkey")
                         const { password, ...other } = result[0];
 
                         response

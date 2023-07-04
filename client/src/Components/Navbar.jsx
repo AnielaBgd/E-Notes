@@ -15,9 +15,7 @@ const Navbar = () => {
         <hr />
         <div className="links"> 
           <Link to="/" className="link"><i className="fa fa-home"></i> Home</Link> 
-          <Link to="/favourites" className="link"><i className="fa fa-heart"></i> Favourites</Link>
-          {/* <Link to="/settings" className="link"><i className="fa fa-cog"></i> Settings</Link> */}
-          {/* <Link to="/trash" className="link"><i className="fa fa-trash"></i> Trash</Link> */}  
+          <Link to="/favourites" className="link"><i className="fa fa-heart"></i> Favourites</Link> 
           <Link onClick={logout} to="/" className="link">
             <span><i className="fa fa-sign-out"></i> Log Out</span>
           </Link>

@@ -11,42 +11,14 @@ const Login = () => {
   const [password, setPassword] = useState(null)
   const [error, setError] = useState('')
 
-  const { login, errorMessage} = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const handleUsername = (e) => {
-    // console.log(e.target.value)
     setUsername(e.target.value)
   }
   const handlePassword = (e) => {
     setPassword(e.target.value)
   } 
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   let formData = [ 
-  //     {'username': username},
-  //     {'password' : password},
-  //   ]
-  //   console.log('Intra aici ' + error)
-  //   if (!validateRequiredInputs(formData)) {
-  //     setError('Please fill in all fields!')
-  //     return false 
-  //    } else {
-  //     if(errorMessage) {
-  //       setError(errorMessage)
-  //     }
-  //     else{
-  //       try{
-  //       await login(formData)
-  //       navigate("/")
-  //     }catch(error){
-  //       setError(error.response.data);
-  //       // console.log(error)
-  //     }
-  //   } 
-  // }
-  // }
-
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -60,7 +32,6 @@ const Login = () => {
       return false 
      } else {
       try{
-        console.log('aici e bine')
         await login(formData)
         .then(res => {
           if(res.message) {
@@ -72,13 +43,11 @@ const Login = () => {
           }
         })
       }catch(error){
-        // setError(error.response.data);
-        // console.log(error)
+        setError(error)
       } 
   }
   }
   
-
   return (
     <div className="auth-register">
       <div className="auth-register-title">
